@@ -15,4 +15,8 @@ public class Controller {
     String user(){
         return "user";
     }
+    @GetMapping("/config")
+    String config(){
+        return "config";
+    }
 }
