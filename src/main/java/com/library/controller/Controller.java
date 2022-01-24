@@ -19,4 +19,8 @@ public class Controller {
     String config(){
         return "config";
     }
+    @GetMapping("/book")
+    String book(){
+        return "book";
+    }
 }
