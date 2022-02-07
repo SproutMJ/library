@@ -7,17 +7,16 @@ var login = {
     },
 
     save : function(){
-        let data = {
-            id : $('#id').val(),
-            password : $('#password').val()
+        const data = {
+             id : $('#id').val(),
+             password : $('#password').val()
         }
-
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: '/login.do',
-            dataType: 'json',
-            contentType: 'application/json; charset=utf8',
-            data: JSON.stringify(data)
+            contentType: 'application/json; charset=UTF-8;',
+            data: JSON.stringify(data),
+            dataType: 'json'
         }).done(function(){
             alert('success')
         }).fail(function(e){

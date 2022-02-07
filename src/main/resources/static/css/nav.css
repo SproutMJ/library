@@ -1,0 +1,16 @@
+.nav{
+    width: 20%;
+    height: 100%;
+    background-color: aquamarine;
+}
+
+.nav > a{
+    display: block;
+    margin: 60px auto ;
+    text-align: center;
+}
+.nav > ul > li {
+    margin: 45px auto;
+    list-style: none;
+
+}

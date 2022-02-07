@@ -1,0 +1,53 @@
+html, body{
+    height: 100%;
+}
+.wrap{
+    width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+   
+}
+.nav{
+    width: 20%;
+    height: 100%;
+    background-color: aqua;
+}
+.content-wrap{
+    margin: auto;
+    width: 80%;
+    height: 100%;
+    background-color: blue;
+}
+.nav > a{
+    display: block;
+    margin: 60px auto ;
+    text-align: center;
+}
+.nav > ul> li {
+    margin: 45px auto;
+    list-style: none;
+    
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+
+/*progress*/
+
+#progress-wrap{
+    margin: 60px auto 0 auto;
+    width: 80%;
+}
+
+.progress-bar{
+    margin: 30px auto;
+    background-color: coral;
+}
+
+.content-wrap > h1{
+    text-align: center;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}

@@ -1,0 +1,56 @@
+
+html, body{
+    height: 100%;
+}
+#main-header{
+    width: 1200px;
+    height: 10%;
+}
+#content-wrap{
+    width: 1200px;
+    height: 70%;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+#banner-list{
+    width: 100%;
+    height: 100%;
+    background-color: aqua;
+    transition: 0.3s ease-out;
+    display: flex;
+}
+
+.banner{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#left-btn{
+    position: absolute;
+    left: 0%;
+    top: 50%;
+}
+
+#right-btn{
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+
+.next-btn{
+    height: 5%;
+    margin: auto;
+    z-index: 1000;
+}
+
+.next-btn:hover > a{
+    opacity: 1;
+}
+
+.banner:last-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
