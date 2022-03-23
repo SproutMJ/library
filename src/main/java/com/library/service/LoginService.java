@@ -1,4 +1,4 @@
 package com.library.service;
 
-public interface BookService {
+public interface LoginService {
 }

@@ -35,8 +35,6 @@ public class BookDto {
                 .isbn13(this.isbn13)
                 .publicationDate(this.publicationDate)
                 .desc(this.desc)
-                .category(this.category)
-                .parentId(this.parentId)
                 .build();
     }
 }

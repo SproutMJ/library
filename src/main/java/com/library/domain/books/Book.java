@@ -4,11 +4,12 @@ import com.library.domain.BaseTime;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
+@ToString
 @Getter
 @Entity
 @NoArgsConstructor
@@ -17,31 +18,44 @@ public class Book extends BaseTime {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 13, nullable = false)
+    @Column(length = 255, nullable = false)
+    private String title;
+
+    @Column(length = 128, nullable = true)
+    private String detailLink;
+
+    @Column(length = 128, nullable = true)
+    private String imageLink;
+
+    @Column(length = 64, nullable = true)
+    private String author;
+
+    @Column(length = 64, nullable = true)
+    private String publisher;
+
+    @Column(length = 13, nullable = true)
     private String isbn13;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 10, nullable = true)
     private String isbn10;
 
-    @Column(nullable = false)
-    private LocalDate publicationDate;
-
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = true)
     private String desc;
 
-    @Column(length = 20, nullable = false)
-    private String category;
-
-    @Column(nullable = false)
-    private Long parentId;
+    @Column(nullable = true)
+    private LocalDate publicationDate;
 
     @Builder
-    public Book(String isbn13, String isbn10, LocalDate publicationDate, String desc, String category, Long parentId) {
+    public Book(Long id, String title, String detailLink, String imageLink, String author, String publisher, String isbn13, String isbn10, String desc, LocalDate publicationDate) {
+        this.id = id;
+        this.title = title;
+        this.detailLink = detailLink;
+        this.imageLink = imageLink;
+        this.author = author;
+        this.publisher = publisher;
         this.isbn13 = isbn13;
         this.isbn10 = isbn10;
-        this.publicationDate = publicationDate;
         this.desc = desc;
-        this.category = category;
-        this.parentId = parentId;
+        this.publicationDate = publicationDate;
     }
 }
