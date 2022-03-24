@@ -3,6 +3,7 @@ package com.library.domain.user;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -12,7 +13,11 @@ import java.time.LocalDate;
 @Entity
 public class Users {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Id
+    private String loginId;
 
     @Column(length = 30, nullable = false)
     private String password;
@@ -27,8 +32,9 @@ public class Users {
     private LocalDate registeredDate;
 
     @Builder
-    public Users(String id, String password, String firstName, String lastName, LocalDate registeredDate) {
+    public Users(Long id, String loginId, String password, String firstName, String lastName, LocalDate registeredDate) {
         this.id = id;
+        this.loginId = loginId;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
