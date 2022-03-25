@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,21 +29,21 @@ public class UserRepositoryTest {
 
     @Before
     public void preRegistering(){
-        usersRepository.save(Users.builder().id("test").password("ptest").firstName("이름").lastName("성").registeredDate(LocalDate.now()).build());
+        usersRepository.save(Users.builder().loginId("test").password("ptest").firstName("이름").lastName("성").registeredDate(LocalDate.now()).build());
     }
 
     @Test
     public void register(){
-        usersRepository.save(Users.builder().id("itest").password("ptest").firstName("이름").lastName("성").registeredDate(LocalDate.now()).build());
-        List<Users> users = usersRepository.findAll();
-        Users user = users.get(0);
+        usersRepository.save(Users.builder().loginId("test2").password("ptest").firstName("이름").lastName("성").registeredDate(LocalDate.now()).build());
+        Users user = usersRepository.findByLoginIdAndPassword("test2", "ptest");
+        System.out.println(user.toString());
         assertThat(user.getFirstName()).isEqualTo("이름");
     }
 
     @Test
     public void findUser(){
-        Optional<Users> user = usersRepository.findById("test");
-        assertThat(user).isNotEqualTo(Optional.empty());
+        Users user = usersRepository.findByLoginIdAndPassword("test", "pest");
+        assertNotNull(user);
     }
 
 }

@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class BookRepositoryTest {
     @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     @After
     public void clean(){

@@ -2,25 +2,35 @@ package com.library.serviceimpl;
 
 import com.library.domain.user.Users;
 import com.library.domain.user.UsersRepository;
-import com.library.web.dto.LoginForm;
+import com.library.service.LoginService;
 import com.library.web.dto.LoginFormDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @RequiredArgsConstructor
 @Service
-public class LoginServiceImpl {
+public class LoginServiceImpl implements LoginService {
     private final UsersRepository usersRepository;
 
+    @Transactional
     public Users login(LoginFormDto form){
-        Users user = usersRepository.findById(form.getId()).get();
-        if(user.getPassword().equals(form.getPassword())) return user;
-        else return null;
+        try{
+            Users user = usersRepository.findByLoginIdAndPassword(form.getId(), form.getPassword());
+            return user;
+        }catch(Exception e){
+            return null;
+        }
     }
 
+    @Transactional
     public boolean register(Users user){
-        if(usersRepository.findById(user.getId()).isPresent()) return false;
-        usersRepository.save(user);
+        try{
+            usersRepository.save(user);
+        }catch(Exception e){
+            return false;
+        }
         return true;
     }
 }

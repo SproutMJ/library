@@ -44,10 +44,6 @@ public class BookServiceImpl {
             InputStream stream = con.getInputStream();
             JSONParser parser = new JSONParser();
             JSONObject object = (JSONObject) parser.parse(new InputStreamReader(stream, "UTF-8"));
-            System.out.println(object.get("lastBuildDate"));
-            System.out.println(object.get("total"));
-            System.out.println(object.get("start"));
-            System.out.println(object.get("display"));
 
             JSONArray array = (JSONArray) object.get("items");
             books = new ArrayList<>();
@@ -72,5 +68,17 @@ public class BookServiceImpl {
         }
 
         return books;
+    }
+
+    @Transactional
+    boolean register(List<Book> books){
+        try{
+            for (Book b: books){
+                bookRepository.save(b);
+            }
+        }catch(Exception e){
+            return false;
+        }
+        return true;
     }
 }

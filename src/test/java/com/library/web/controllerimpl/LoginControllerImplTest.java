@@ -34,7 +34,7 @@ public class LoginControllerImplTest {
     @Before
     public void testPrepare(){
         when(mockHttpRequest.getSession()).thenReturn(mockHttpSession);
-        controller.register(Users.builder().id("test").password("test").firstName("gildong").lastName("hong").registeredDate(LocalDate.now()).build(), mockBindingResult);
+        controller.register(Users.builder().loginId("test").password("test").firstName("gildong").lastName("hong").registeredDate(LocalDate.now()).build(), mockBindingResult);
     }
 
 //    @Test

@@ -3,10 +3,12 @@ package com.library.domain.curriculumbookmap;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
+@ToString
 @Getter
 @Entity
 public class CurriculumBookMap {

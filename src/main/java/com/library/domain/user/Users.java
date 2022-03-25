@@ -3,12 +3,14 @@ package com.library.domain.user;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @NoArgsConstructor
+@ToString
 @Getter
 @Entity
 public class Users {
@@ -16,7 +18,7 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Id
+    @Column(unique = true, nullable = false)
     private String loginId;
 
     @Column(length = 30, nullable = false)

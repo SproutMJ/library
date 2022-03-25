@@ -3,11 +3,13 @@ package com.library.domain.curriculum;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @NoArgsConstructor
+@ToString
 @Getter
 @Entity
 public class Curriculum {
