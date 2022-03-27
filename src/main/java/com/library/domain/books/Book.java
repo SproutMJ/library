@@ -9,6 +9,9 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/*
+ * 책 엔티티
+ */
 @ToString
 @Getter
 @Entity
@@ -33,10 +36,10 @@ public class Book extends BaseTime {
     @Column(length = 64, nullable = true)
     private String publisher;
 
-    @Column(length = 13, nullable = true)
+    @Column(length = 13, unique = true)
     private String isbn13;
 
-    @Column(length = 10, nullable = true)
+    @Column(length = 10, unique = true)
     private String isbn10;
 
     @Column(length = 100, nullable = true)

@@ -7,6 +7,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+/*
+ * 커리큘럼-책 매핑 테이블
+ */
 @NoArgsConstructor
 @ToString
 @Getter

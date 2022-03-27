@@ -2,6 +2,9 @@ package com.library.service;
 
 import org.springframework.stereotype.Service;
 
+/*
+ * 유저 서비스 레이어 인터페이스
+ */
 @Service
 public interface UserService {
 }

@@ -15,6 +15,7 @@ public class BookServiceImplTest {
     @Autowired
     BookServiceImpl bookServiceImpl;
 
+
     @Test
     public void searchTest(){
         List<Book> books =  bookServiceImpl.searchBookByNaver("Do it! HTML+CSS+자바스크립트 웹 표준의 정석");
@@ -23,8 +24,10 @@ public class BookServiceImplTest {
         }
     }
     @Test
-    public void curTest(){
-
+    public void saveTest(){
+        Book b = bookServiceImpl.searchBookByNaver("자바").get(0);
+        bookServiceImpl.register(b);
+        bookServiceImpl.register(b);
     }
     @Test
     public void progTest(){

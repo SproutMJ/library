@@ -2,6 +2,7 @@ package com.library.serviceimpl;
 
 import com.library.domain.books.Book;
 import com.library.domain.books.BookRepository;
+import com.library.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,16 +23,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * 책 서비스 레이어 구현체
+ */
 @RequiredArgsConstructor
 @Service
-public class BookServiceImpl {
+public class BookServiceImpl implements BookService {
     public final BookRepository bookRepository;
 
     private static String clientID = "8OgLifq3mDuwMOJhVmWB"; //api 사용 신청시 제공되는 아이디
     private static String clientSecret = "Q9kNhTJyS1"; //패스워드
 
     @Transactional
-    List<Book> searchBookByNaver(String name){
+    @Override
+    public List<Book> searchBookByNaver(String name){
         List<Book> books = null;
         try {
             name = URLEncoder.encode(name);
@@ -51,11 +56,20 @@ public class BookServiceImpl {
             long size = array.size();
             for (int i=0; i<size; i++){
                 JSONObject o = (JSONObject) array.get(i);
+                String[] isbn = ((String)o.get("isbn")).split(" ");
+                String isbn10, isbn13;
+                if(isbn[0].length() == 10){
+                    isbn10 = isbn[0];
+                    isbn13 = isbn[1];
+                }else{
+                    isbn10 = isbn[1];
+                    isbn13 = isbn[0];
+                }
 
                 books.add(Book.builder().title((String) o.get("title"))
                         .detailLink((String) o.get("link")).imageLink((String) o.get("image"))
                         .author((String) o.get("author")).publisher((String) o.get("publisher"))
-                        .isbn13((String) o.get("isbn")).desc((String) o.get("desc"))
+                        .isbn10(isbn10).isbn13(isbn13).desc((String) o.get("desc"))
                         .publicationDate(LocalDate.parse((String)o.get("pubdate"), DateTimeFormatter.ofPattern("yyyyMMdd"))).build());
             }
 
@@ -71,12 +85,12 @@ public class BookServiceImpl {
     }
 
     @Transactional
-    boolean register(List<Book> books){
+    @Override
+    public boolean register(Book book){
         try{
-            for (Book b: books){
-                bookRepository.save(b);
-            }
+            bookRepository.save(book);
         }catch(Exception e){
+            e.printStackTrace();
             return false;
         }
         return true;

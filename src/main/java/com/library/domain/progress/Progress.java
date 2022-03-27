@@ -7,6 +7,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+/*
+ * 책 진행도 엔티티
+ */
 @NoArgsConstructor
 @ToString
 @Getter
@@ -22,10 +25,15 @@ public class Progress {
     @Column(nullable = false)
     private Long bookId;
 
+    @Column(nullable = true)
+    private Double progress;
+
+
     @Builder
-    public Progress(Long id, Long userId, Long bookId) {
+    public Progress(Long id, Long userId, Long bookId, Double progress) {
         this.id = id;
         this.userId = userId;
         this.bookId = bookId;
+        this.progress = progress;
     }
 }

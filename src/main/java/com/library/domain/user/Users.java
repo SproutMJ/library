@@ -9,6 +9,9 @@ import org.hibernate.annotations.Generated;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/*
+ * 유저 엔티티
+ */
 @NoArgsConstructor
 @ToString
 @Getter

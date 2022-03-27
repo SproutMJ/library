@@ -8,6 +8,9 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/*
+ * 커리큘럼 엔티티
+ */
 @NoArgsConstructor
 @ToString
 @Getter
