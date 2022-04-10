@@ -22,10 +22,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class CurriculumServiceImpl implements CurriculumService {
-    private CurriculumRepository curriculumRepository;
-    private BookService bookService;
-    private CurriculumBookMapRepository curriculumBookMapRepository;
-    private ProgressRepository progressRepository;
+    private final CurriculumRepository curriculumRepository;
+    private final BookService bookService;
+    private final CurriculumBookMapRepository curriculumBookMapRepository;
+    private final ProgressRepository progressRepository;
 
     @Transactional
     @Override

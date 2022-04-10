@@ -1,0 +1,14 @@
+.wrap {
+    width: 1200px;
+    height: calc(100vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+*{
+    margin: auto;
+}
+
+tr{
+    margin: 0 0 1vh auto;
+}

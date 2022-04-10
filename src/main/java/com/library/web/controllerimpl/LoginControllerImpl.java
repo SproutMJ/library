@@ -1,6 +1,8 @@
 package com.library.web.controllerimpl;
 
 import com.library.domain.user.Users;
+import com.library.service.LoginService;
+import com.library.service.UserService;
 import com.library.serviceimpl.LoginServiceImpl;
 import com.library.serviceimpl.UserServiceImpl;
 import com.library.web.controller.LoginController;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 /*
  * 로그인 컨트롤러 레이어 구현체
@@ -20,29 +23,38 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @Controller
 public class LoginControllerImpl implements LoginController {
-    private final UserServiceImpl userServiceImpl;
-    private final LoginServiceImpl loginServiceImpl;
+    private final UserService userServiceqnImpl;
+    private final LoginService loginServiceImpl;
 
-    @GetMapping(value = "/loginFrom")
+    @GetMapping(value = "/login/loginForm")
     @Override
     public String loginForm(){
-        return "login/loginForm";
+        return "loginForm";
     }
 
-    @PostMapping(value = "/login")
+    @Override
+    @GetMapping(value = "/login/registerForm")
+    public String registerForm() {
+        return "registerForm";
+    }
+
+    @PostMapping(value = "/login/login.do")
     @Override
     public String login(@ModelAttribute @Validated LoginFormDto loginForm,
-                        BindingResult bindingResult,
-                        @RequestParam(defaultValue = "/") String redirectURL,
+                        @RequestParam(name = "redirect", defaultValue = "/") String redirectURL,
                         HttpServletRequest request) {
-       if(bindingResult.hasErrors()) return "login/loginForm";
+       //if(bindingResult.hasErrors()) return "/login/loginForm";
 
-       Users user = loginServiceImpl.login(loginForm);
+        System.out.println(loginForm.getId());
+        Users user = loginServiceImpl.login(loginForm);
+        //System.out.println(user.toString());
         if(user == null) {
-            bindingResult.reject("loginFail", "로그인 실패");
-            return "login/loginForm";
+            System.out.println("실패");
+            //bindingResult.reject("loginFail", "로그인 실패");
+            return "loginForm";
         }
 
+        System.out.println(user.getId());
         //세션 만료시간 추가 필요
         HttpSession session = request.getSession();
         session.setAttribute("id", user.getId());
@@ -50,7 +62,7 @@ public class LoginControllerImpl implements LoginController {
         return "redirect:" + redirectURL;
     }
 
-    @PostMapping(value = "/logout")
+    @PostMapping(value = "/login/logout.do")
     @Override
     public String logout(HttpServletRequest request) {
         if(request.getSession(false) != null)
@@ -59,14 +71,21 @@ public class LoginControllerImpl implements LoginController {
             return "redirect:/";
     }
 
-    @PostMapping(value="/register")
+    @PostMapping(value="/login/register.do")
     @Override
-    public String register(HttpServletRequest request, BindingResult bindingResult){
-        //로그인 폼 제작 이후 구현
-//        if(loginServiceImpl.register(user)) {
-//            bindingResult.reject("registerFail", "회원가입 실패");
-//            return "login/loginFail";
-//        }
-        return "login/loginSuccess";
+    public String register(HttpServletRequest request){
+        Users user = Users.builder()
+                .firstName(request.getParameter("first-name"))
+                .lastName(request.getParameter("last-name"))
+                .registeredDate(LocalDate.now())
+                .loginId(request.getParameter("id"))
+                .password(request.getParameter("password"))
+                .build();
+
+        if(!loginServiceImpl.register(user)) {
+            //bindingResult.reject("registerFail", "회원가입 실패");
+            return "login/loginFail";
+        }
+        return "redirect:/login/loginForm";
     }
 }

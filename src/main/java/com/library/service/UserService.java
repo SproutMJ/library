@@ -1,5 +1,6 @@
 package com.library.service;
 
+import com.library.domain.user.Users;
 import org.springframework.stereotype.Service;
 
 /*
@@ -7,4 +8,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface UserService {
+    Users findByLoginIdAndPassword(String loginId, String password);
 }

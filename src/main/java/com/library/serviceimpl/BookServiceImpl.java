@@ -39,7 +39,7 @@ public class BookServiceImpl implements BookService {
     public List<Book> searchBookByNaver(String name){
         List<Book> books = null;
         try {
-            name = URLEncoder.encode(name);
+            name = URLEncoder.encode(name, "UTF-8");
             URL url = new URL("https://openapi.naver.com/v1/search/book.json?query=" + name);
             URLConnection con;
             con = url.openConnection();
@@ -54,6 +54,7 @@ public class BookServiceImpl implements BookService {
             books = new ArrayList<>();
 
             long size = array.size();
+            System.out.println(size);
             for (int i=0; i<size; i++){
                 JSONObject o = (JSONObject) array.get(i);
                 String[] isbn = ((String)o.get("isbn")).split(" ");
@@ -77,10 +78,12 @@ public class BookServiceImpl implements BookService {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }finally {
 
+        }
         return books;
     }
 

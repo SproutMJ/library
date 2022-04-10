@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="nav.css">
-<link rel="stylesheet" href="layout.css">
+@import "nav.css";
+@import "layout.css";
 /*search*/
 #search-bar{
     display: flex;

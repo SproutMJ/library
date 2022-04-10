@@ -12,11 +12,11 @@ public class IndexControllerImpl implements IndexController {
 
     @GetMapping("/")
     public String index(){
-        return "<h1>index</h1>";
+        return "index";
     }
 
     @GetMapping("/login")
     public String login(){
-        return "login";
+        return "loginForm";
     }
 }

@@ -13,9 +13,12 @@ import com.library.web.dto.BookDto;
 import com.library.web.dto.CurriculumDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /*
@@ -24,17 +27,17 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class UserControllerImpl implements UserController {
-    private CurriculumService curriculumService;
-    private CurriculumBookMapRepository curriculumBookMapRepository;
-    private BookRepository bookRepository;
-    private ProgressRepository progressRepository;
+    private final CurriculumService curriculumService;
+    private final CurriculumBookMapRepository curriculumBookMapRepository;
+    private final BookRepository bookRepository;
+    private final ProgressRepository progressRepository;
 
     @GetMapping("/curriculum")
     @Override
-    public String curriculum(HttpServletRequest req){
+    public String curriculum(HttpServletRequest req, Model model){
         Long userID = (Long) req.getSession().getAttribute("id");
         List<Curriculum> curriculums = curriculumService.retrieveByUserId(userID);
-        List<CurriculumDto> curriculumDtos = null;
+        List<CurriculumDto> curriculumDtos = new LinkedList<>();
         for (Curriculum c : curriculums){
             Long curId = c.getId();
             List<BookDto> bookDtos = null;
@@ -48,8 +51,7 @@ public class UserControllerImpl implements UserController {
             CurriculumDto curriculumDto = CurriculumDto.builder().curriculum(c).books(bookDtos).build();
             curriculumDtos.add(curriculumDto);
         }
-
-        req.setAttribute("curriculums", curriculumDtos);
+        model.addAttribute("curriculums", curriculumDtos);
         return "curriculum";
     }
 

@@ -1,5 +1,6 @@
 package com.library.web.controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface BookController {
     @GetMapping("/search")
-    String search(HttpServletRequest req);
+    String search(HttpServletRequest req, Model model);
 
 
 }

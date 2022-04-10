@@ -34,7 +34,7 @@ public class LoginControllerImplTest {
     @Before
     public void testPrepare(){
         when(mockHttpRequest.getSession()).thenReturn(mockHttpSession);
-        controller.register(Users.builder().loginId("test").password("test").firstName("gildong").lastName("hong").registeredDate(LocalDate.now()).build(), mockBindingResult);
+        //controller.register(Users.builder().loginId("test").password("test").firstName("gildong").lastName("hong").registeredDate(LocalDate.now()).build());
     }
 
 //    @Test
@@ -49,7 +49,7 @@ public class LoginControllerImplTest {
 
     @Test
     public void loginTest(){
-        controller.login(new LoginFormDto("test", "test"), mockBindingResult, "/", mockHttpRequest);
+        controller.login(new LoginFormDto("test", "test"), "/", mockHttpRequest);
 
 
     }

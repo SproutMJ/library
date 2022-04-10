@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface LoginController {
     String loginForm();
+    String registerForm();
     String login(@ModelAttribute @Validated LoginFormDto loginForm,
-                 BindingResult bindingResult,
                  @RequestParam(defaultValue = "/") String redirectURL,
                  HttpServletRequest request);
     String logout(HttpServletRequest request);
-    String register(HttpServletRequest request, BindingResult bindingResult);
+    String register(HttpServletRequest request);
 
 }

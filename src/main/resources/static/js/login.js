@@ -25,4 +25,4 @@ var login = {
     }
 
 }
-login.init()
+//login.init()

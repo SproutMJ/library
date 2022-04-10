@@ -6,28 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="/css/search.css">
 </head>
 <body>
     <section class="wrap">
-        
+        {{>layout/nav}}
         <section class="content-wrap">
-            
+            <section id="search-bar">
+                <form action="#" method="get" autocomplete="on" name="book_name">
+                    <input type="text" name="title" placeholder="검색할 책" id="book-search-bar">
+                    <button type="submit" id="book-search-btn">검색</button>
+                </form>
+
+            </section>
             <section id="books-list">
                 <ul>
-                    <li>책1</li>
-                    <li>책2</li>
-                    <li>책3</li>
-                    <li>책4</li>
-                    <li>책5</li>
-                    <li>책1</li>
-                    <li>책2</li>
-                    <li>책3</li>
-                    <li>책4</li>
-                    <li>책5</li>
+                    {{#books}}
+                        <li><a>{{title}}</a></li>
+                    {{/books}}
                 </ul>
             </section>
-            
+            <section id="book-pager">
+                <div id="before" class="page-btn"><a href="#"><</a></div>
+                <div class="page-btn"><a href="#">1</a></div>
+                <div class="page-btn"><a href="#">2</a></div>
+                <div class="page-btn"><a href="#">3</a></div>
+                <div class="page-btn"><a href="#">4</a></div>
+                <div class="page-btn"><a href="#">5</a></div>
+                <div id="after" class="page-btn"><a href="#">></a></div>
+            </section>
         </section>
     </section>
     <script src="search.js"></script>

@@ -5,12 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/curriculum.css">
 </head>
 <body>
     <section class="wrap">
-        
+        {{>layout/nav}}
         <section class="content-wrap">
-            
+            {{#curriculums}}
+                {{#curriculum}}
+                <li>{{name}}</li>
+                {{/curriculum}}
+            {{/curriculums}}
+            <section id="book-pager">
+                <div id="before" class="page-btn"><a href="#"><</a></div>
+                <div class="page-btn"><a href="#">1</a></div>
+                <div class="page-btn"><a href="#">2</a></div>
+                <div class="page-btn"><a href="#">3</a></div>
+                <div class="page-btn"><a href="#">4</a></div>
+                <div class="page-btn"><a href="#">5</a></div>
+                <div id="after" class="page-btn"><a href="#">></a></div>
+            </section>
         </section>
     </section>
 </body>

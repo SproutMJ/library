@@ -1,9 +1,23 @@
 *{
-    background-color: aqua;
+    background-color: #b6c9c9;
+    margin: auto;
 }
 .wrap{
-    
+    width: 1200px;
+    height: calc(100vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 } 
-.wrap .box{ 
-   
+.wrap .login-box{
+
+}
+
+#btn-login {
+    width: 100%;
+}
+
+#div-reg{
+    clear: both;
+    text-align: center;
 }
